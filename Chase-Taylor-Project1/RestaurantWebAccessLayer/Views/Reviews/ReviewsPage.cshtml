@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_RestaurantsLayout.cshtml";
+}
+@model BusinessLayer.RestaurantComp.Restaurant
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+
+    @if (Model.reviews.Count() == 0)
+    {
+        <div style="font-size:xx-large">
+            There are no corresponding Reviews to the Values that have been input.
+        </div>
+    }
+    else
+    {
+        <h2>@ViewBag.Title      Average Rating: @Model.CalculateAverageRating()</h2>
+        <table style="border:5px solid; border-collapse:collapse; font-size: x-large">
+            <thead>
+                <tr>
+                    <th>Rating</th>
+                    <th>Written</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.reviews)
+                {
+                    <tr style="border:2px solid black">
+                        <td style=" font-size:large">@x.rating</td>
+                        <td style=" font-size:large">@x.written</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.BeginForm("AddReview", "Reviews", FormMethod.Get)
+        {
+            @Html.Hidden("urlString", Request.Url.ToString());
+            <input type="submit" value="Add Review"/>
+        }
+    }
+</body>
+

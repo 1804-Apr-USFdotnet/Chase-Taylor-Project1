@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_RestaurantsLayout.cshtml";
+}
+@model IEnumerable<BusinessLayer.RestaurantComp.Restaurant>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+    @if (Model.Count() == 0)
+    {
+        <div style="font-size:xx-large">
+            There are no corresponding Restaurants to the Values that have been input.
+        </div>
+    }
+    else
+    {
+        <table style="border:5px solid; border-collapse:collapse" cellspacing="10" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Cuisine</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Average Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rest in Model)
+                {
+                    <tr style="border:2px solid black">
+                        <td style=" font-size:large">@Html.ActionLink(rest.name, "ReviewPage", "Reviews", rest, null)</td>
+                        <td style=" font-size:large">@rest.cuisine</td>
+                        <td style=" font-size:large">@rest.restAddress</td>
+                        <td style=" font-size:large">@rest.phoneNumber</td>
+                        <td style=" font-size:large">@String.Format("{0:0.00}", rest.CalculateAverageRating())</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+
+
+
+
+
+

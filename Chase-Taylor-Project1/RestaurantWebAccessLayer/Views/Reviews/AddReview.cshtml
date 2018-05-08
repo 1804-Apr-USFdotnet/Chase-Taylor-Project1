@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "AddReview";
+    Layout = "~/Views/Shared/_RestaurantsLayout.cshtml";
+}
+@model RestaurantWebAccessLayer.Models.Review
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+    <h2>AddReview</h2>
+
+    @using (Html.BeginForm("AddingReview", "Reviews", FormMethod.Get))
+    {
+        //@Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Review</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.rating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.rating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.written, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.written, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.written, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create"/>
+            </div>
+        </div>
+    </div>
+    }
+</body>
+</html>
+
+

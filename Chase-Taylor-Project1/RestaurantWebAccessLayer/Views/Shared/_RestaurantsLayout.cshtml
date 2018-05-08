@@ -1,0 +1,64 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<style>
+    .this-wrap{
+        margin-bottom:2px;
+        height:125px
+    }
+</style>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="this-wrap">
+        <div class="navbar navbar-inverse navbar-fixed-top" ; style="background-color: black; display:block">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="@Url.Action("Index", "Restaurants")" class="navbar-brand">
+                        <img src="~/images/RestLogo.png" title="title" alt="additional title" width="125" height="125" />
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li style="color:snow; font-size:x-large; padding-top:50px">@Html.ActionLink("Top 3", "Top3", "Restaurants")</li>
+                        <li style="color:snow; font-size:x-large; padding-top:50px">@Html.ActionLink("Restaurants", "Restaurants", "Restaurants")</li>
+                        <!--<li style="color:snow; font-size:x-large; padding-top:50px">@Html.ActionLink("Make New restaurant", "BuildRestaurant", "Restaurants")</li>-->
+                    </ul>
+                    @using (Html.BeginForm("Search", "Restaurants", FormMethod.Get))
+    {
+                <ul class="nav navbar-nav">
+                    <li style="padding-top:50px; font-size:large">@Html.TextBox("id", ViewBag.CurrentFilter as string)</li>
+                    <li style="padding-top:50px; font-size:large"><input type="submit" value="Search" /></li>
+                </ul>
+                <script>
+                    document.getElementById('name').addEventListener('keypress', function(event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        }
+                     });
+                </script>
+}
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - What's Good?!</p>
+        </footer>
+    </div>
+</body>
+</html>
